@@ -1,0 +1,13 @@
+.success-background{
+    background-color: #449d44;
+    border-color: #398439;
+    color: #ffffff;
+}
+
+.success-link{
+    color:#ffffff !important;
+}
+
+.success-link:hover{
+     color:#9d9d9d !important;
+}
