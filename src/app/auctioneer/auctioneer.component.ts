@@ -17,7 +17,7 @@ declare var firebase: any;
 export class AuctioneerComponent implements OnInit {
   startOptionTime = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',]
   endOptionTime = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',]
-  categories = ['IT', 'Appliances', 'Fashion', 'Cloths', 'Painting', 'House', 'Company', 'Others']
+  categories = ['IT & Computers', 'Appliances', 'Fashion', 'Cloths', 'Painting', 'House', 'Company', 'Others']
 
   userData: any;
   authData;
@@ -93,6 +93,7 @@ export class AuctioneerComponent implements OnInit {
       this.auctioneerInformation.startTimeInMilliSeconds = startTimeInMilliSeconds;
       this.auctioneerInformation.endTimeInMilliSeconds = endTimeInMilliSeconds;
       this.auctioneerInformation.firstbiddingamount = firstbiddingamount;
+        this.auctioneerInformation.category = category;
 
       // firebase.database().ref('/auctioneeree/').set(this.auctioneerInformation);
       // this.seveToDb(this.auctioneerInformation)

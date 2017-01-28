@@ -1,0 +1,14 @@
+.container-category{
+    font-size: 3em;
+    color: #d43f3a;    
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+
+.select:hover {
+    background-color: #d43f3a;
+    color: #ffffff;
+    cursor: pointer;
+}

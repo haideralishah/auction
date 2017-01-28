@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { DataService } from './data.service';
 import { AuctioneerComponent } from './auctioneer/auctioneer.component';
 import { BidderComponent } from './bidder/bidder.component';
+import { AuctionsComponent } from './auctions/auctions.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     NavigationComponent,
     LoginComponent,
     AuctioneerComponent,
-    BidderComponent
+    BidderComponent,
+    AuctionsComponent
   ],
   imports: [
     BrowserModule,

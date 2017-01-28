@@ -1,3 +1,6 @@
-<p>
-  bidder works!
-</p>
+<div class="container-category">
+  <div *ngFor="let category of categories" class="select" (click)='moveToAuctions(category)'>
+    {{category}}
+  </div>
+
+</div>
