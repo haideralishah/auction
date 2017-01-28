@@ -34,6 +34,20 @@
 
 
           <div class="form-group">
+            <!--<label for="category">Category:</label>
+            <select name="category" id="category" #category>
+                <option *ngFor="let c of categories; let num = index">{{c}}</option>
+              </select>-->
+
+
+            <label for="category">Category:</label>
+            <select name="category" id="category" #category>
+                <option *ngFor="let c of categories; let num = index">{{c}}</option>
+              </select>
+
+
+          </div>
+          <div class="form-group">
             <label for="startdate">Starting Date:</label>
             <input type="date" class="form-control" id="startdate" #startdate>
           </div>
@@ -68,15 +82,16 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" *ngIf='!warningPublish' (click)='publishWarning(auction.value, product.value, description.value, startdate.value, starttime.value, enddate.value, endtime.value, firstbiddingamount.value)'>Publish Auction</button>
-        <button type="button" class="btn btn-default" (click)='seveToDb(auctioneerInformation)' data-dismiss="modal" *ngIf='warningPublish'>Publish Auction</button>
+        <button type="button" class="btn btn-default" *ngIf='!warningPublish' (click)='publishWarning(auction.value, product.value, description.value, startdate.value, starttime.value, enddate.value, endtime.value, firstbiddingamount.value, category.value)'>Publish Auction</button>
+        <button type="button" class="btn btn-default" (click)='seveToDb(auctioneerInformation)' data-dismiss="modal" *ngIf='warningPublish'>Accept</button>
+        <button type="button" class="btn btn-default" (click)='cancel(auctioneerInformation)' data-dismiss="modal" *ngIf='warningPublish'>Not Accept</button>
       </div>
     </div>
 
   </div>
 </div>
 
-
+<br><br>
 
 
 <div class="alert alert-danger center-content" *ngIf='allAuctioneeries.length == 0'>

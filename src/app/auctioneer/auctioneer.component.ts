@@ -17,6 +17,7 @@ declare var firebase: any;
 export class AuctioneerComponent implements OnInit {
   startOptionTime = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',]
   endOptionTime = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',]
+  categories = ['IT', 'Appliances', 'Fashion', 'Cloths', 'Painting', 'House', 'Company', 'Others']
 
   userData: any;
   authData;
@@ -48,8 +49,8 @@ export class AuctioneerComponent implements OnInit {
   errorInformationMsg;
   warningPublish;
   auctioneerInformation: any = {};
-  publishWarning(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount) {
-    console.log(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount);
+  publishWarning(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount, category) {
+    console.log(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount, category);
 
     let rightNow = new Date().getTime();
     let startdateInMilliSeconds = this.parseDate(startdate).getTime();
@@ -58,7 +59,7 @@ export class AuctioneerComponent implements OnInit {
     endtime = endtime.slice(0, 2);
     let startTimeInMilliSeconds = (starttime * 60000 * 60) + startdateInMilliSeconds;
     let endTimeInMilliSeconds = (endtime * 60000 * 60) + endDateInMilliSeconds;
-    if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount) {
+    if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount || !category) {
       this.errorInformationMsg = 'All fields are required.'
       this.errorInformation = true;
     }
@@ -105,26 +106,17 @@ export class AuctioneerComponent implements OnInit {
       .then((v) => {
 
         this.auctioneerInformation = {};
+        this.router.navigate(['./home']);
 
       })
 
-    // this.authData = firebase.auth().currentUser.uid;
-    // firebase.database().ref('auctioneeri/').set(auctioneerInformation)
-    //   .then((v) => {
-    //     // this.auctioneerInformation = {};
-    //   },
-    //   (r) => {
-    //     console.log(r, 'dddddddddd');
-    //     // this.auctioneerInformation = {};
-    //   });
   }
 
-  // firebase.database().ref('auctioneeri/').push(this.auctioneerInformation)
-  //     .then((v) => {
+  cancel() {
+    this.auctioneerInformation = {};
+    this.router.navigate(['./home']);
+  }
 
-  //       this.auctioneerInformation = {};
-
-  //     })
 
 
 
