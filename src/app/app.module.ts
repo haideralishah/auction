@@ -14,6 +14,8 @@ import { AboutComponent } from './about/about.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { DataService } from './data.service';
+import { AuctioneerComponent } from './auctioneer/auctioneer.component';
+import { BidderComponent } from './bidder/bidder.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'auctionerr', component: AuctioneerComponent },
+  { path: 'bidder', component: BidderComponent },
+
 ];
 
 @NgModule({
@@ -31,7 +36,9 @@ const routes: Routes = [
     HomeComponent,
     AboutComponent,
     NavigationComponent,
-    LoginComponent
+    LoginComponent,
+    AuctioneerComponent,
+    BidderComponent
   ],
   imports: [
     BrowserModule,
