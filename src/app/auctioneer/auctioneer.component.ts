@@ -31,6 +31,7 @@ export class AuctioneerComponent implements OnInit {
 
       });
     firebase.database().ref('/auctioneeri').on('child_added', (data) => {
+      this.allAuctioneeries = [];
       let obj: any = data.val();
       obj.id = data.key;
       obj.startTimeInMilliSeconds = new Date(obj.startTimeInMilliSeconds);
