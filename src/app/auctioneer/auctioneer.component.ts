@@ -20,6 +20,7 @@ export class AuctioneerComponent implements OnInit {
 
   userData: any;
   authData;
+  allAuctioneeries: any = [];
   constructor(public dataService: DataService, private router: Router) {
     let that = this;
     this.authData = firebase.auth().currentUser.uid;
@@ -27,8 +28,17 @@ export class AuctioneerComponent implements OnInit {
       .then(function (snapshot) {
         that.userData = snapshot.val();
         console.log(that.userData);
-        // ...
+
       });
+    firebase.database().ref('/auctioneeri').on('child_added', (data) => {
+      let obj: any = data.val();
+      obj.id = data.key;
+      obj.startTimeInMilliSeconds = new Date(obj.startTimeInMilliSeconds);
+      obj.endTimeInMilliSeconds = new Date(obj.endTimeInMilliSeconds);
+      that.allAuctioneeries.push(obj)
+      console.log(that.allAuctioneeries, 'that.allAuctioneeries');
+    })
+
   }
 
   ngOnInit() {
@@ -82,7 +92,7 @@ export class AuctioneerComponent implements OnInit {
       this.auctioneerInformation.endTimeInMilliSeconds = endTimeInMilliSeconds;
       this.auctioneerInformation.firstbiddingamount = firstbiddingamount;
 
-      firebase.database().ref('/auctioneeree/').set(this.auctioneerInformation);
+      // firebase.database().ref('/auctioneeree/').set(this.auctioneerInformation);
       // this.seveToDb(this.auctioneerInformation)
     }
     console.log(this.auctioneerInformation);
@@ -90,15 +100,22 @@ export class AuctioneerComponent implements OnInit {
 
   seveToDb(auctioneerInformation) {
     console.log(auctioneerInformation, 'auctioneerInformation');
-    // this.authData = firebase.auth().currentUser.uid;
-    firebase.database().ref('auctioneeri/').set(auctioneerInformation)
+    firebase.database().ref('auctioneeri/').push(this.auctioneerInformation)
       .then((v) => {
-        // this.auctioneerInformation = {};
-      },
-      (r) => {
-        console.log(r, 'dddddddddd');
-        // this.auctioneerInformation = {};
-      });
+
+        this.auctioneerInformation = {};
+
+      })
+
+    // this.authData = firebase.auth().currentUser.uid;
+    // firebase.database().ref('auctioneeri/').set(auctioneerInformation)
+    //   .then((v) => {
+    //     // this.auctioneerInformation = {};
+    //   },
+    //   (r) => {
+    //     console.log(r, 'dddddddddd');
+    //     // this.auctioneerInformation = {};
+    //   });
   }
 
   // firebase.database().ref('auctioneeri/').push(this.auctioneerInformation)
