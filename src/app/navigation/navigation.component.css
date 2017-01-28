@@ -1,7 +1,7 @@
 .success-background{
-    background-color: #449d44;
-    border-color: #398439;
-    color: #ffffff;
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
 }
 
 .success-link{
@@ -10,4 +10,8 @@
 
 .success-link:hover{
      color:#9d9d9d !important;
+}
+
+.brand-link{
+     color:#ffffff !important;
 }

@@ -12,6 +12,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { LoginComponent } from './login/login.component';
+import { DataService } from './data.service';
 
 
 const routes: Routes = [
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'signup', component: SignUpComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -27,7 +30,8 @@ const routes: Routes = [
     SignUpComponent,
     HomeComponent,
     AboutComponent,
-    NavigationComponent
+    NavigationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    DataService
   ],
   bootstrap: [AppComponent]
 })
