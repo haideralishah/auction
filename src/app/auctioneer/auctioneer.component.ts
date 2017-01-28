@@ -44,6 +44,7 @@ export class AuctioneerComponent implements OnInit {
     let startdateInMilliSeconds = this.parseDate(startdate).getTime();
     let endDateInMilliSeconds = this.parseDate(enddate).getTime();
     starttime = starttime.slice(0, 2);
+    endtime = endtime.slice(0, 2);
     let startTimeInMilliSeconds = (starttime * 60000 * 60) + startdateInMilliSeconds;
     let endTimeInMilliSeconds = (endtime * 60000 * 60) + endDateInMilliSeconds;
     if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount) {
@@ -58,7 +59,7 @@ export class AuctioneerComponent implements OnInit {
         this.errorInformationMsg = ''
       }, 5000);
     }
-    else if (endDateInMilliSeconds < startdateInMilliSeconds) {
+    else if (endDateInMilliSeconds - startdateInMilliSeconds ! > 0) {
       this.errorInformationMsg = 'Ending date and dime can not be before starting.'
       this.errorInformation = true;
       setTimeout(() => {
@@ -67,9 +68,9 @@ export class AuctioneerComponent implements OnInit {
       }, 5000);
     }
     else {
-      // this.errorInformation = false;
-      // this.warningPublish = true;
-      // this.errorInformationMsg = 'Please varify your provided details going to be saved.'
+      this.errorInformation = false;
+      this.warningPublish = true;
+      this.errorInformationMsg = 'Please check your provided details, going to be saved.'
       this.auctioneerInformation.email = this.userData.email;
       this.auctioneerInformation.mobNumber = this.userData.mobNumber;
       this.auctioneerInformation.userName = this.userData.userName;
@@ -85,7 +86,7 @@ export class AuctioneerComponent implements OnInit {
 
   }
 
-  
+
 
 
 
