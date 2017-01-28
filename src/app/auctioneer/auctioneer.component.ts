@@ -39,15 +39,37 @@ export class AuctioneerComponent implements OnInit {
   auctioneerInformation: any = {};
   publishWarning(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount) {
     console.log(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount);
+
+    let rightNow = new Date().getTime();
+    let startdateInMilliSeconds = this.parseDate(startdate).getTime();
+    let endDateInMilliSeconds = this.parseDate(enddate).getTime();
+    starttime = starttime.slice(0, 2);
+    let startTimeInMilliSeconds = (starttime * 60000 * 60) + startdateInMilliSeconds;
+    let endTimeInMilliSeconds = (endtime * 60000 * 60) + endDateInMilliSeconds;
     if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount) {
       this.errorInformationMsg = 'All fields are required.'
       this.errorInformation = true;
     }
+    else if (rightNow - startdateInMilliSeconds > 0 || rightNow - endDateInMilliSeconds > 0) {
+      this.errorInformationMsg = 'You need to select future date.'
+      this.errorInformation = true;
+      setTimeout(() => {
+        this.errorInformation = false;
+        this.errorInformationMsg = ''
+      }, 5000);
+    }
+    else if (endDateInMilliSeconds < startdateInMilliSeconds) {
+      this.errorInformationMsg = 'Ending date and dime can not be before starting.'
+      this.errorInformation = true;
+      setTimeout(() => {
+        this.errorInformation = false;
+        this.errorInformationMsg = ''
+      }, 5000);
+    }
     else {
-      this.errorInformation = false;
-      this.warningPublish = true;
-      this.errorInformationMsg = 'Please varify your provided details going to be saved.'
-
+      // this.errorInformation = false;
+      // this.warningPublish = true;
+      // this.errorInformationMsg = 'Please varify your provided details going to be saved.'
       this.auctioneerInformation.email = this.userData.email;
       this.auctioneerInformation.mobNumber = this.userData.mobNumber;
       this.auctioneerInformation.userName = this.userData.userName;
@@ -55,13 +77,21 @@ export class AuctioneerComponent implements OnInit {
       this.auctioneerInformation.auction = auction;
       this.auctioneerInformation.product = product;
       this.auctioneerInformation.description = description;
-      this.auctioneerInformation.startdate = startdate;
-      this.auctioneerInformation.starttime = starttime;
-      this.auctioneerInformation.enddate = enddate;
-      this.auctioneerInformation.endtime = endtime;
+      this.auctioneerInformation.startTimeInMilliSeconds = startTimeInMilliSeconds;
+      this.auctioneerInformation.endTimeInMilliSeconds = endTimeInMilliSeconds;
       this.auctioneerInformation.firstbiddingamount = firstbiddingamount;
     }
     console.log(this.auctioneerInformation);
+
   }
 
+  
+
+
+
+
+  parseDate(s) {
+    var b = s.split(/\D/);
+    return new Date(b[0], --b[1], b[2]);
+  }
 }
