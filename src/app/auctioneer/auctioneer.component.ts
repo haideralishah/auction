@@ -74,19 +74,39 @@ export class AuctioneerComponent implements OnInit {
       this.auctioneerInformation.email = this.userData.email;
       this.auctioneerInformation.mobNumber = this.userData.mobNumber;
       this.auctioneerInformation.userName = this.userData.userName;
-      this.auctioneerInformation.userUid = this.userData.uid;
+      this.auctioneerInformation.userUid = this.authData;
       this.auctioneerInformation.auction = auction;
       this.auctioneerInformation.product = product;
       this.auctioneerInformation.description = description;
       this.auctioneerInformation.startTimeInMilliSeconds = startTimeInMilliSeconds;
       this.auctioneerInformation.endTimeInMilliSeconds = endTimeInMilliSeconds;
       this.auctioneerInformation.firstbiddingamount = firstbiddingamount;
+
+      firebase.database().ref('/auctioneeree/').set(this.auctioneerInformation);
+      // this.seveToDb(this.auctioneerInformation)
     }
     console.log(this.auctioneerInformation);
-
   }
 
+  seveToDb(auctioneerInformation) {
+    console.log(auctioneerInformation, 'auctioneerInformation');
+    // this.authData = firebase.auth().currentUser.uid;
+    firebase.database().ref('auctioneeri/').set(auctioneerInformation)
+      .then((v) => {
+        // this.auctioneerInformation = {};
+      },
+      (r) => {
+        console.log(r, 'dddddddddd');
+        // this.auctioneerInformation = {};
+      });
+  }
 
+  // firebase.database().ref('auctioneeri/').push(this.auctioneerInformation)
+  //     .then((v) => {
+
+  //       this.auctioneerInformation = {};
+
+  //     })
 
 
 
