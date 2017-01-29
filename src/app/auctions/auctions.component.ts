@@ -17,16 +17,26 @@ declare var firebase: any;
 export class AuctionsComponent implements OnInit {
   allAuctioneeries: any = [];
   authData: any;
+  category: any;
   constructor(private route: ActivatedRoute, public dataService: DataService, private router: Router) {
     this.authData = firebase.auth().currentUser.uid;
+    route.params.subscribe(params => { this.category = params['category']; });
 
-    firebase.database().ref('/actioneeri').on('child_added', (data) => {
-      let obj = data.val();
+    console.log('contrustu');
+    firebase.database().ref('/auctioneeri').on('child_added', (data) => {
+      // this.allAuctioneeries = [];
+      let obj: any = data.val();
       obj.id = data.key;
-      this.allAuctioneeries.push(obj)
-      console.log(this.allAuctioneeries, 'this.allAuctioneeries');
-    })
+      obj.startTimeInMilliSeconds = new Date(obj.startTimeInMilliSeconds);
+      obj.endTimeInMilliSeconds = new Date(obj.endTimeInMilliSeconds);
 
+      if (obj.category == this.category && this.authData != obj.creatorId) {
+        console.log(this.category, 'category');
+        this.allAuctioneeries.push(obj)
+        console.log(this.allAuctioneeries, 'that.allAuctioneeries');
+
+      }
+    })
   }
   ngOnInit() {
 

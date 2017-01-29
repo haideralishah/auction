@@ -1,1 +1,27 @@
-<h1>hello world</h1>
+<div class="alert alert-danger center-content" *ngIf='allAuctioneeries.length == 0 || allAuctioneeries == nulls '>
+    <strong>Alert!</strong> No Booking Yet.
+</div>
+
+<div *ngIf='allAuctioneeries.length > 0'>
+    <div class="container" *ngFor="let ac of allAuctioneeries">
+        <div class="jumbotron">
+            <h1>{{ac.auction}}</h1>
+            <h1>{{ac.product}}</h1>
+            <p>{{ac.description}}</p>
+        </div>
+        <p>Auction will start On : {{ac.startTimeInMilliSeconds}}</p>
+        <p>Auction will end On : {{ac.startTimeInMilliSeconds}}</p>
+        <p>First Bid will Start with {{ac.firstbiddingamount}} $</p>
+        <table class="table">
+
+            <tbody>
+                <tr>
+                    <td>{{ac.userName}}</td>
+                    <td>{{ac.mobNumber}}</td>
+                    <td>{{ac.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
