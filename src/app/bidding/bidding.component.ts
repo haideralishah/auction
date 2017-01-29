@@ -26,6 +26,7 @@ export class BiddingComponent implements OnInit {
   }
   bidamount: any = '';
   warning: any = {};
+  bid: any = {};
   placebid(biddingData) {
     console.log(this.bidamount, 'msgBox');
     console.log(biddingData, 'biddingData');
@@ -38,7 +39,7 @@ export class BiddingComponent implements OnInit {
         this.warning.message = ''
       }, 5000);
     }
-    else if (this.bidamount < biddingData.firstbiddingamount) {
+    else if (this.bidamount <= biddingData.firstbiddingamount) {
       this.warning.status = true;
       this.warning.msg = 'You can not place bid lesser than' + biddingData.firstbiddingamount + '$'
       setTimeout(() => {
@@ -47,7 +48,26 @@ export class BiddingComponent implements OnInit {
       }, 5000);
     }
     else {
+
+      this.bid.creatorId = biddingData.creatorId;
+      this.bid.productId = biddingData.id;
+      this.bid.placerId = firebase.auth().currentUser.uid;
+      this.bid.amount = this.bidamount;
+
+      console.log(this.bid, 'this.bid ***********************');
+
       console.log('amount bidded');
+      firebase.database().ref('bids/').push(this.bid)
+        .then((v) => {
+
+          this.bid = {};
+          console.log(v, '**************');
+        })
+
+
+
+
+
     }
 
 
