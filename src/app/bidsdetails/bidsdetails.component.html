@@ -1,5 +1,5 @@
-<div class="alert alert-danger center-content" *ngIf = "bidsData.length > 0">
-  <strong>Alert!</strong> No Booking Yet.
+<div class="alert alert-danger center-content" *ngIf="bidsData.length == 0">
+  <strong>Alert!</strong> No Bids has ben placed yet.
 </div>
 
 <div>
@@ -27,4 +27,24 @@
     </table>
   </div>
 
+</div>
+<br><br>
+
+<div>
+  <table class="table" *ngIf="bidsData.length > 0">
+    <thead>
+      <tr>
+        <th>Amount</th>
+        <th>Placed By</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let b of bidsData">
+      <tr>
+        <td>{{b.amount}}</td>
+        <td>{{b.placerEmail}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
 </div>

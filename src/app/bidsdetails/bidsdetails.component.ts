@@ -35,6 +35,7 @@ export class BidsdetailsComponent implements OnInit {
       obj.id = data.key;
       if (obj.productId == this.currentBid.id) {
         this.bidsData.push(obj)
+        this.bidsData.reverse();
       }
       console.log(this.bidsData);
 
