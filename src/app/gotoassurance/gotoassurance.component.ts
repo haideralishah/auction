@@ -26,7 +26,7 @@ export class GotoassuranceComponent implements OnInit {
 
   accept() {
     console.log('accept');
-    this.router.navigate(['./gotobid']);
+    this.router.navigate(['./bidding']);
   }
 
 

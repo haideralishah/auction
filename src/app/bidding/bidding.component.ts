@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+import {
+  RouterModule,
+  ActivatedRoute,
+  Router,
+  Routes
+} from '@angular/router';
 
+declare var firebase: any;
 @Component({
   selector: 'app-bidding',
   templateUrl: './bidding.component.html',
@@ -7,7 +15,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BiddingComponent implements OnInit {
 
-  constructor() { }
+  biddingData: any;
+  constructor(private route: ActivatedRoute, public dataService: DataService, private router: Router) {
+    this.biddingData = localStorage.getItem("actiondetails");
+    console.log(this.biddingData);
+  }
 
   ngOnInit() {
   }
