@@ -1,3 +1,7 @@
+<div class="alert alert-danger center-content" *ngIf='warning.status == true'>
+  <strong>Caution!</strong> {{warning.msg}}
+</div>
+
 <div>
   <div class="container">
     <div class="jumbotron">
@@ -15,8 +19,8 @@
           <td>{{biddingData.userName}}</td>
           <td>{{biddingData.mobNumber}}</td>
           <td>{{biddingData.email}}</td>
-          <td><button type="button" class="btn btn-danger" (click)="placebid(biddingData)">Place Bid</button>
-          </td>
+          <!--<td><button type="button" class="btn btn-danger" (click)="placebid(biddingData)">Place Bid</button>-->
+          <!--</td>-->
         </tr>
       </tbody>
     </table>

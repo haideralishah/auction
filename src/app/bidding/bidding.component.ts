@@ -24,10 +24,32 @@ export class BiddingComponent implements OnInit {
 
   ngOnInit() {
   }
-  msgBox = '';
+  bidamount: any = '';
+  warning: any = {};
   placebid(biddingData) {
-    console.log(this.msgBox, 'msgBox');
+    console.log(this.bidamount, 'msgBox');
     console.log(biddingData, 'biddingData');
+    // this.bidamount = parseInt(this.bidamount);
+    if (this.bidamount == '' || isNaN(this.bidamount)) {
+      this.warning.status = true;
+      this.warning.msg = 'Please type correct amount.'
+      setTimeout(() => {
+        this.warning.status = false;
+        this.warning.message = ''
+      }, 5000);
+    }
+    else if (this.bidamount < biddingData.firstbiddingamount) {
+      this.warning.status = true;
+      this.warning.msg = 'You can not place bid lesser than' + biddingData.firstbiddingamount + '$'
+      setTimeout(() => {
+        this.warning.status = false;
+        this.warning.message = ''
+      }, 5000);
+    }
+    else {
+      console.log('amount bidded');
+    }
+
 
   }
 
