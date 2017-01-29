@@ -46,8 +46,39 @@ export class BiddingComponent implements OnInit {
       }
     })
 
+    this.timeToGo()
 
+  }
+  timeLeft: any;
+  minute: any;
+  second: any;
+  timeFunction: any;
+  timeDiffer: any;
+  timeToGo() {
+    let rightNow = new Date().getTime();
+    this.timeDiffer = new Date(this.biddingData.endTimeInMilliSeconds);
+    this.minute = new Date(this.biddingData.endTimeInMilliSeconds).getTime() - rightNow;
+    this.minute = new Date(this.minute).getMinutes();
+    this.minute = parseInt(this.minute);
 
+    this.second = 59;
+    console.log(this.minute, 'this.minute this.minute this.minute');
+    this.timeLeft = this.minute + " : " + this.second;
+    let that = this;
+    this.timeFunction = setInterval(() => {
+      console.log('time out');
+      that.second--;
+      that.timeLeft = that.minute + " : " + that.second;
+      if (that.second == 0) {
+        that.second = 59;
+        that.minute--;
+        that.timeLeft = that.minute + " : " + that.second;
+
+      }
+    }, 1000);
+  }
+  ngOnDestroy() {
+    clearInterval(this.timeFunction);
   }
 
   ngOnInit() {
