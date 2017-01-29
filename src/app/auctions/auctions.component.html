@@ -1,3 +1,32 @@
-<p>
-  auctions works!
-</p>
+<div class="alert alert-danger center-content" *ngIf='allAuctioneeries.length == 0 || allAuctioneeries == nulls '>
+  <strong>Alert!</strong> No Booking Yet.
+</div>
+<div class="alert alert-warning" *ngIf='errorInformation'>
+  <strong>Note!</strong> {{errorInformationMsg}}
+</div>
+
+<div *ngIf='allAuctioneeries.length > 0'>
+  <div class="container" *ngFor="let ac of allAuctioneeries">
+    <div class="jumbotron" *ngIf='authData == ac.userUid'>
+      <h1 *ngIf='authData == ac.userUid'>{{ac.auction}}</h1>
+      <h1 *ngIf='authData == ac.userUid'>{{ac.product}}</h1>
+      <p *ngIf='authData == ac.userUid'>{{ac.description}}</p>
+    </div>
+    <p *ngIf='authData == ac.userUid'>Auction will start On : {{ac.startTimeInMilliSeconds}}</p>
+    <p *ngIf='authData == ac.userUid'>Auction will end On : {{ac.startTimeInMilliSeconds}}</p>
+    <p *ngIf='authData == ac.userUid'>First Bid will Start with {{ac.firstbiddingamount}} $</p>
+    <table class="table" *ngIf='authData == ac.userUid'>
+
+      <tbody *ngIf='authData == ac.userUid'>
+        <tr *ngIf='authData == ac.userUid'>
+          <td *ngIf='authData == ac.userUid'>{{ac.userName}}</td>
+          <td *ngIf='authData == ac.userUid'>{{ac.mobNumber}}</td>
+          <td *ngIf='authData == ac.userUid'>{{ac.email}}</td>
+          <td *ngIf='authData == ac.userUid'><button type="button" class="btn btn-danger .btn-xs" (click)="goToBidding(ac)">Go to bid!</button> </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -17,6 +17,9 @@ import { DataService } from './data.service';
 import { AuctioneerComponent } from './auctioneer/auctioneer.component';
 import { BidderComponent } from './bidder/bidder.component';
 import { AuctionsComponent } from './auctions/auctions.component';
+import { BiddingComponent } from './bidding/bidding.component';
+import { GotobidComponent } from './gotobid/gotobid.component';
+import { GotoassuranceComponent } from './gotoassurance/gotoassurance.component';
 
 
 const routes: Routes = [
@@ -27,7 +30,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'auctionerr', component: AuctioneerComponent },
   { path: 'bidder', component: BidderComponent },
-
+  { path: 'auctions/:category', component: AuctionsComponent },
+  { path: 'bidding', component: BiddingComponent },
+  { path: 'gotobid', component: GotobidComponent },
+  { path: 'gotoassurancebid', component: GotoassuranceComponent },
 ];
 
 @NgModule({
@@ -40,7 +46,10 @@ const routes: Routes = [
     LoginComponent,
     AuctioneerComponent,
     BidderComponent,
-    AuctionsComponent
+    AuctionsComponent,
+    BiddingComponent,
+    GotobidComponent,
+    GotoassuranceComponent
   ],
   imports: [
     BrowserModule,

@@ -45,7 +45,9 @@ export class BidderComponent implements OnInit {
   }
 
   moveToAuctions(category) {
-    console.log(category, 'category');
+
+    this.router.navigate(['/auctions', category]);
+
   }
 
 }
