@@ -17,6 +17,7 @@ export class BiddingComponent implements OnInit {
 
   biddingData: any;
   bids: any = [];
+  bidsToSort: any = [];
   constructor(private route: ActivatedRoute, public dataService: DataService, private router: Router) {
     this.biddingData = localStorage.getItem("auctionDetails");
     this.biddingData = JSON.parse(this.biddingData);
@@ -39,6 +40,8 @@ export class BiddingComponent implements OnInit {
 
         this.bids.push(obj)
         console.log(this.bids, 'this.bids');
+        // this.bidsToSort = [40, 100, 1, 5, 25, 10];
+        this.bids.reverse();
 
       }
     })
