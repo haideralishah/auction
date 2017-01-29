@@ -15,7 +15,7 @@ declare var firebase: any;
   styleUrls: ['./bidder.component.css']
 })
 export class BidderComponent implements OnInit {
-  categories = ['IT & Computers', 'Appliances', 'Fashion', 'Cloths', 'Painting', 'House', 'Company', 'Others']
+  categories = ['IT & Computers', 'Appliances', 'Fashion', 'Cloths', 'Painting', 'House', 'Company', 'Others'];
 
   userData: any;
   authData;
