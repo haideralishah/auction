@@ -33,13 +33,13 @@ export class AuctioneerComponent implements OnInit {
 
       });
     firebase.database().ref('/auctioneeri').on('child_added', (data) => {
-      this.allAuctioneeries = [];
+      // this.allAuctioneeries = [];
       let obj: any = data.val();
       obj.id = data.key;
       obj.startTimeInMilliSeconds = new Date(obj.startTimeInMilliSeconds);
       obj.endTimeInMilliSeconds = new Date(obj.endTimeInMilliSeconds);
-      that.allAuctioneeries.push(obj)
-      console.log(that.allAuctioneeries, 'that.allAuctioneeries');
+      this.allAuctioneeries.push(obj)
+      console.log(this.allAuctioneeries, 'that.allAuctioneeries');
     })
 
   }
@@ -60,7 +60,8 @@ export class AuctioneerComponent implements OnInit {
     endtime = endtime.slice(0, 2);
     let startTimeInMilliSeconds = (starttime * 60000 * 60) + startdateInMilliSeconds + (startminute * 60000);
     let endTimeInMilliSeconds = (endtime * 60000 * 60) + endDateInMilliSeconds + (endminute * 60000);
-
+    console.log(startTimeInMilliSeconds, 'startTimeInMilliSeconds')
+    console.log(endTimeInMilliSeconds, 'endTimeInMilliSeconds')
 
     if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount || !category || !startminute || !endminute) {
       this.errorInformationMsg = 'All fields are required.'
@@ -74,7 +75,8 @@ export class AuctioneerComponent implements OnInit {
     //     this.errorInformationMsg = ''
     //   }, 5000);
     // }
-    else if (endTimeInMilliSeconds - startTimeInMilliSeconds ! > 0) {
+    else if (endTimeInMilliSeconds - startTimeInMilliSeconds < 0) {
+      console.log(starttime,endtime,startminute,endminute)
       this.errorInformationMsg = 'You need to select future date, ending date and dime can not be before starting.'
       this.errorInformation = true;
       setTimeout(() => {
@@ -111,7 +113,7 @@ export class AuctioneerComponent implements OnInit {
 
         this.auctioneerInformation = {};
         this.router.navigate(['./home']);
-
+        console.log(v, '**************');
       })
 
   }
