@@ -15,8 +15,9 @@ declare var firebase: any;
   styleUrls: ['./auctioneer.component.css']
 })
 export class AuctioneerComponent implements OnInit {
-  startOptionTime = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',]
+  startOptionTime = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',]
   endOptionTime = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',]
+  minute = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59',]
   categories = ['IT & Computers', 'Appliances', 'Fashion', 'Cloths', 'Painting', 'House', 'Company', 'Others']
 
   userData: any;
@@ -49,30 +50,32 @@ export class AuctioneerComponent implements OnInit {
   errorInformationMsg;
   warningPublish;
   auctioneerInformation: any = {};
-  publishWarning(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount, category) {
-    console.log(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount, category);
+  publishWarning(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount, category, startminute, endminute) {
+    console.log(auction, product, description, startdate, starttime, enddate, endtime, firstbiddingamount, category, startminute, endminute);
 
     let rightNow = new Date().getTime();
     let startdateInMilliSeconds = this.parseDate(startdate).getTime();
     let endDateInMilliSeconds = this.parseDate(enddate).getTime();
     starttime = starttime.slice(0, 2);
     endtime = endtime.slice(0, 2);
-    let startTimeInMilliSeconds = (starttime * 60000 * 60) + startdateInMilliSeconds;
-    let endTimeInMilliSeconds = (endtime * 60000 * 60) + endDateInMilliSeconds;
-    if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount || !category) {
+    let startTimeInMilliSeconds = (starttime * 60000 * 60) + startdateInMilliSeconds + (startminute * 60000);
+    let endTimeInMilliSeconds = (endtime * 60000 * 60) + endDateInMilliSeconds + (endminute * 60000);
+
+
+    if (!auction || !product || !description || !startdate || !starttime || !enddate || !endtime || !firstbiddingamount || !category || !startminute || !endminute) {
       this.errorInformationMsg = 'All fields are required.'
       this.errorInformation = true;
     }
-    else if (rightNow - startdateInMilliSeconds > 0 || rightNow - endDateInMilliSeconds > 0) {
-      this.errorInformationMsg = 'You need to select future date.'
-      this.errorInformation = true;
-      setTimeout(() => {
-        this.errorInformation = false;
-        this.errorInformationMsg = ''
-      }, 5000);
-    }
-    else if (endDateInMilliSeconds - startdateInMilliSeconds ! > 0) {
-      this.errorInformationMsg = 'Ending date and dime can not be before starting.'
+    // else if (rightNow - startTimeInMilliSeconds > 0 || rightNow - endTimeInMilliSeconds > 0) {
+    //   this.errorInformationMsg = 'You need to select future date.'
+    //   this.errorInformation = true;
+    //   setTimeout(() => {
+    //     this.errorInformation = false;
+    //     this.errorInformationMsg = ''
+    //   }, 5000);
+    // }
+    else if (endTimeInMilliSeconds - startTimeInMilliSeconds ! > 0) {
+      this.errorInformationMsg = 'You need to select future date, ending date and dime can not be before starting.'
       this.errorInformation = true;
       setTimeout(() => {
         this.errorInformation = false;
@@ -86,14 +89,14 @@ export class AuctioneerComponent implements OnInit {
       this.auctioneerInformation.email = this.userData.email;
       this.auctioneerInformation.mobNumber = this.userData.mobNumber;
       this.auctioneerInformation.userName = this.userData.userName;
-      this.auctioneerInformation.userUid = this.authData;
+      this.auctioneerInformation.creatorId = this.authData;
       this.auctioneerInformation.auction = auction;
       this.auctioneerInformation.product = product;
       this.auctioneerInformation.description = description;
       this.auctioneerInformation.startTimeInMilliSeconds = startTimeInMilliSeconds;
       this.auctioneerInformation.endTimeInMilliSeconds = endTimeInMilliSeconds;
       this.auctioneerInformation.firstbiddingamount = firstbiddingamount;
-        this.auctioneerInformation.category = category;
+      this.auctioneerInformation.category = category;
 
       // firebase.database().ref('/auctioneeree/').set(this.auctioneerInformation);
       // this.seveToDb(this.auctioneerInformation)
