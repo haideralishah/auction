@@ -30,7 +30,8 @@
 </div>
 <br><br>
 
-<div>
+
+<div *ngIf="awarded == false">
   <table class="table" *ngIf="bidsData.length > 0">
     <thead>
       <tr>
@@ -48,3 +49,38 @@
     </tbody>
   </table>
 </div>
+
+
+
+
+<div *ngIf="awarded == true">
+  <h2 *ngIf="awarded == true && awardedData.amount">Order has been awarded. Detaisl Are Below:</h2>
+  <table class="table" *ngIf="bidsData.length > 0">
+    <thead>
+      <tr>
+        <th>Person Email</th>
+        <th>On Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td>{{awardedData.placerEmail}}</td>
+        <td>{{awardedData.amount}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!--<div *ngIf="awarded == true">
+  <div class="container">
+    <div class="jumbotron">
+      <h1>{{awardedData.amount}}</h1>
+      <h1>{{awardedData.placerEmail}}</h1>
+      <p>{{currentBid.description}}</p>
+    </div>
+
+  </div>
+
+</div>-->
