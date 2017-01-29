@@ -132,6 +132,9 @@
           <td *ngIf='authData == ac.creatorId'>{{ac.userName}}</td>
           <td *ngIf='authData == ac.creatorId'>{{ac.mobNumber}}</td>
           <td *ngIf='authData == ac.creatorId'>{{ac.email}}</td>
+          <td *ngIf='authData == ac.creatorId'><button type="button" class="btn btn-danger" (click)='seebids(ac)'>See Bids</button>
+          </td>
+
         </tr>
       </tbody>
     </table>

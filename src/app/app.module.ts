@@ -20,6 +20,7 @@ import { AuctionsComponent } from './auctions/auctions.component';
 import { BiddingComponent } from './bidding/bidding.component';
 import { GotobidComponent } from './gotobid/gotobid.component';
 import { GotoassuranceComponent } from './gotoassurance/gotoassurance.component';
+import { BidsdetailsComponent } from './bidsdetails/bidsdetails.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'bidding', component: BiddingComponent },
   { path: 'gotobid', component: GotobidComponent },
   { path: 'gotoassurancebid', component: GotoassuranceComponent },
+  { path: 'bidsdetails', component: BidsdetailsComponent },
 ];
 
 @NgModule({
@@ -49,7 +51,8 @@ const routes: Routes = [
     AuctionsComponent,
     BiddingComponent,
     GotobidComponent,
-    GotoassuranceComponent
+    GotoassuranceComponent,
+    BidsdetailsComponent
   ],
   imports: [
     BrowserModule,

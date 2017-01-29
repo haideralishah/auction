@@ -76,7 +76,7 @@ export class AuctioneerComponent implements OnInit {
     //   }, 5000);
     // }
     else if (endTimeInMilliSeconds - startTimeInMilliSeconds < 0) {
-      console.log(starttime,endtime,startminute,endminute)
+      console.log(starttime, endtime, startminute, endminute)
       this.errorInformationMsg = 'You need to select future date, ending date and dime can not be before starting.'
       this.errorInformation = true;
       setTimeout(() => {
@@ -123,7 +123,12 @@ export class AuctioneerComponent implements OnInit {
     this.router.navigate(['./home']);
   }
 
+  seebids(ac) {
+    console.log(ac, 'Details****************');
+    localStorage.setItem('bidsdetails', JSON.stringify(ac));
+    this.router.navigate(['./bidsdetails']);
 
+  }
 
 
 
