@@ -17,11 +17,20 @@ export class BiddingComponent implements OnInit {
 
   biddingData: any;
   constructor(private route: ActivatedRoute, public dataService: DataService, private router: Router) {
-    this.biddingData = localStorage.getItem("actiondetails");
+    this.biddingData = localStorage.getItem("auctionDetails");
+    this.biddingData = JSON.parse(this.biddingData);
     console.log(this.biddingData);
   }
 
   ngOnInit() {
   }
+  msgBox = '';
+  placebid(biddingData) {
+    console.log(this.msgBox, 'msgBox');
+    console.log(biddingData, 'biddingData');
+
+  }
+
+
 
 }

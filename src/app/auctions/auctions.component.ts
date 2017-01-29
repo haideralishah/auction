@@ -19,6 +19,8 @@ export class AuctionsComponent implements OnInit {
   authData: any;
   category: any;
   constructor(private route: ActivatedRoute, public dataService: DataService, private router: Router) {
+
+
     this.authData = firebase.auth().currentUser.uid;
     route.params.subscribe(params => { this.category = params['category']; });
 
@@ -27,10 +29,10 @@ export class AuctionsComponent implements OnInit {
       // this.allAuctioneeries = [];
       let obj: any = data.val();
       obj.id = data.key;
-      obj.startTimeInMilliSeconds = new Date(obj.startTimeInMilliSeconds);
-      obj.endTimeInMilliSeconds = new Date(obj.endTimeInMilliSeconds);
-
-      if (obj.category == this.category && this.authData != obj.creatorId) {
+      obj.isoStartTime = new Date(obj.startTimeInMilliSeconds);
+      obj.isoEndTime = new Date(obj.endTimeInMilliSeconds);
+      let rightNow = new Date().getTime();
+      if (obj.category == this.category && this.authData != obj.creatorId && rightNow < obj.endTimeInMilliSeconds) {
         console.log(this.category, 'category');
         this.allAuctioneeries.push(obj)
         console.log(this.allAuctioneeries, 'that.allAuctioneeries');
@@ -42,5 +44,22 @@ export class AuctionsComponent implements OnInit {
 
   }
 
+  warning: any = {};
+  startBidding(auction) {
+    let rightNow = new Date().getTime();
+    if (rightNow > auction.startTimeInMilliSeconds && rightNow < auction.endTimeInMilliSeconds) {
+      console.log(auction, 'auction started');
+      localStorage.setItem('auctionDetails', JSON.stringify(auction));
+      this.router.navigate(['./gotoassurancebid']);
+    }
+    else {
+
+      this.warning.status = true;
+      this.warning.msg = "Bidding has not started yet."
+
+    }
+
+
+  }
 
 }

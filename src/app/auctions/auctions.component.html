@@ -1,5 +1,5 @@
-<div class="alert alert-danger center-content" *ngIf='allAuctioneeries.length == 0 || allAuctioneeries == nulls '>
-    <strong>Alert!</strong> No Booking Yet.
+<div class="alert alert-danger center-content" *ngIf='warning.status == true'>
+    <strong>Caution!</strong> {{warning.msg}}
 </div>
 
 <div *ngIf='allAuctioneeries.length > 0'>
@@ -9,8 +9,8 @@
             <h1>{{ac.product}}</h1>
             <p>{{ac.description}}</p>
         </div>
-        <p>Auction will start On : {{ac.startTimeInMilliSeconds}}</p>
-        <p>Auction will end On : {{ac.startTimeInMilliSeconds}}</p>
+        <p>Auction will start On : {{ac.isoStartTime}}</p>
+        <p>Auction will end On : {{ac.isoEndTime}}</p>
         <p>First Bid will Start with {{ac.firstbiddingamount}} $</p>
         <table class="table">
 
@@ -19,6 +19,8 @@
                     <td>{{ac.userName}}</td>
                     <td>{{ac.mobNumber}}</td>
                     <td>{{ac.email}}</td>
+                    <td><button type="button" class="btn btn-danger" (click)="startBidding(ac)">Start Bidding</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

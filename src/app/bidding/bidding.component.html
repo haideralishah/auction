@@ -1,3 +1,33 @@
-<p>
-  bidding works!
-</p>
+<div>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>{{biddingData.auction}}</h1>
+      <h1>{{biddingData.product}}</h1>
+      <p>{{biddingData.description}}</p>
+    </div>
+    <p>Auction will start On : {{biddingData.isoStartTime}}</p>
+    <p>Auction will end On : {{biddingData.isoEndTime}}</p>
+    <p>First Bid will Start with {{biddingData.firstbiddingamount}} $</p>
+    <table class="table">
+
+      <tbody>
+        <tr>
+          <td>{{biddingData.userName}}</td>
+          <td>{{biddingData.mobNumber}}</td>
+          <td>{{biddingData.email}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="placebid(biddingData)">Place Bid</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="input-group message-form">
+  <input type="text" class="form-control" placeholder="Type Amount" #bidamt [(ngModel)]="bidamount">
+  <div class="input-group-btn">
+    <button class="btn btn-default" (click)="placebid(biddingData)">
+        <!--<i class="glyphicon glyphicon-send"></i>-->Place Bid
+      </button>
+  </div>
