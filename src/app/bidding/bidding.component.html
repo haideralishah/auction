@@ -11,7 +11,7 @@
     </div>
     <p>Auction will start On : {{biddingData.isoStartTime}}</p>
     <p>Auction will end On : {{biddingData.isoEndTime}}</p>
-    <p>First Bid will Start with {{biddingData.firstbiddingamount}} $</p>
+    <p>Start Bidding with {{biddingData.firstbiddingamount}} $</p>
     <table class="table">
 
       <tbody>
@@ -35,3 +35,23 @@
         <!--<i class="glyphicon glyphicon-send"></i>-->Place Bid
       </button>
   </div>
+</div>
+<br><br>
+<div>
+  <table class="table" *ngIf="bids.length > 0">
+    <thead>
+      <tr>
+        <th>Amount</th>
+        <th>Placed By</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let b of bids">
+      <tr>
+        <td>{{b.amount}}</td>
+        <td>{{b.placerEmail}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>

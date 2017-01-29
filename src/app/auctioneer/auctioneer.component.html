@@ -123,7 +123,7 @@
       <p *ngIf='authData == ac.creatorId'>{{ac.description}}</p>
     </div>
     <p *ngIf='authData == ac.creatorId'>Auction will start On : {{ac.startTimeInMilliSeconds}}</p>
-    <p *ngIf='authData == ac.creatorId'>Auction will end On : {{ac.startTimeInMilliSeconds}}</p>
+    <p *ngIf='authData == ac.creatorId'>Auction will end On : {{ac.endTimeInMilliSeconds}}</p>
     <p *ngIf='authData == ac.creatorId'>First Bid will Start with {{ac.firstbiddingamount}} $</p>
     <table class="table" *ngIf='authData == ac.creatorId'>
 
